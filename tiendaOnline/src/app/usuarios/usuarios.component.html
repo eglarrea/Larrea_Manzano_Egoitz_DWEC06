@@ -1,0 +1,143 @@
+<div class="container">
+  <div *ngIf="eliminado!=null" class="alert alert-{{ alertCSS }} alert-dismissible fade show" role="alert">
+    <strong>{{ mesajeDatosActualizado}}</strong>
+    <button type="button" (click)="eliminarMensaje()" click class="btn-close" data-dismiss="alert" aria-label="Close">
+    </button>
+  </div>
+  
+    <div class="row">
+    <div class="col-12 mt-5">
+      <table class="table table-bordered"> 
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios; index as i">
+            <th scope="row">{{ usuario.id }}</th>
+            <td>{{ usuario.name.firstname }}</td>
+            <td>{{ usuario.name.lastname }}</td>
+            <td>{{ usuario.username }}</td>
+            <td>
+              <button type="button" class="btn btn-primary  btn-sm" title="editar" data-bs-toggle="modal" data-bs-target="#modalModificarDatos" (click)="editarUsu(usuario)">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button type="button" class="btn btn-danger  btn-sm" title="Eliminar" data-bs-toggle="modal" data-bs-target="#modalConfirmacionEliminar" (click)="eliminarUsu(usuario)" >
+                <i class="fa fa-trash"></i>
+              </button>
+            
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+   
+  </div>
+
+
+  <div *ngIf="eliminarSelect" class="modal" id="modalConfirmacionEliminar">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirmación Baja</h4>
+                <button type="button" class="btn-close" #closebutton data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="row">
+                <p>Vas a dar de Baja el usuario:<span for="" *ngIf="usuarioSeleccionado!=null">{{usuarioSeleccionado.name.firstname}} {{usuarioSeleccionado.name.lastname}}</span></p>
+              </div>
+              <div class="row">
+                <p>¿Estas seguro?</p>
+              </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary"  (click)="confirmEliminarUsu(usuarioSeleccionado)"><i class="fa fa-trash"></i>Eliminar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-window-close"></i>Cancelar</button>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="editarSelect" class="modal" id="modalModificarDatos">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Modificar Datos Usuario</h4>
+              <button type="button"  #closebuttonActualizar class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div *ngIf="alertCSS!=null" class="alert alert-{{ alertCSS }} alert-dismissible fade show" role="alert">
+            <strong>{{ mesajeDatosActualizado}}</strong>
+            <button type="button" (click)="eliminarMensaje()" click class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Usuario</label>
+                  <input *ngIf="usuarioSeleccionado!=null"  type="text" [(ngModel)]="usuarioSeleccionado.username" placeholder="Username" class="form-control" required>
+              </div>
+                  <div class="col-4">
+                      <label for="">Nombre</label>
+                      <input *ngIf="usuarioSeleccionado!=null" type="text" [(ngModel)]="usuarioSeleccionado.name.firstname" class="form-control">
+                  </div>
+                  <div class="col-4">
+                    <label for="">Apellido</label>
+                    <input  *ngIf="usuarioSeleccionado!=null" type="text" [(ngModel)]="usuarioSeleccionado.name.lastname" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-4">
+                      <label for="">Password</label>
+                      <input *ngIf="usuarioSeleccionado!=null" type="password" [(ngModel)]="usuarioSeleccionado.password" disabled class="form-control">
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                    <label for="">Poblacion</label>
+                    <input *ngIf="usuarioSeleccionado!=null" type="text" [(ngModel)]="usuarioSeleccionado.address.city" class="form-control">
+                </div>
+                <div class="col-4">
+                  <label for="">Calle</label>
+                  <input *ngIf="usuarioSeleccionado!=null" type="text" [(ngModel)]="usuarioSeleccionado.address.street" class="form-control">
+              </div>
+              <div class="col-4">
+                <label for="">Número</label>
+                <input *ngIf="usuarioSeleccionado!=null" type="text" [(ngModel)]="usuarioSeleccionado.address.number" class="form-control">
+            </div>
+            <div class="col-4">
+              <label for="">Cp</label>
+              <input *ngIf="usuarioSeleccionado!=null" type="text" [(ngModel)]="usuarioSeleccionado.address.zipcode" class="form-control">
+          </div>
+          <div class="col-4">
+            <label for="">Teléfono</label>
+            <input *ngIf="usuarioSeleccionado!=null" type="text" [(ngModel)]="usuarioSeleccionado.phone" class="form-control">
+        </div>
+            </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="confirmActualizarUsu(usuarioSeleccionado)"><i class="fa fa-save"></i>Actualizar</button>
+              <button type="button" #closebuttonActualizar  class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-window-close"></i>Cancelar</button>
+          </div>
+
+      </div>
+  </div>
+</div>
+ 
+  
+ 
