@@ -17,6 +17,7 @@ export class ProductosService {
    * @returns {Observable<any>}
    */
   getProductos(): Observable<any> {
+    console.log("Realiza llamada obtener producto :"+this.url);
     return this._http.get(this.url);
   }
 
@@ -28,6 +29,7 @@ export class ProductosService {
    */
   updateProducto(producto: any): Observable<any> {
     const urlId = this.url + '/' + producto.id;
+    console.log("Realiza llamada update producto :"+urlId);
     return this._http.put(urlId, producto);
   }
 
@@ -38,7 +40,7 @@ export class ProductosService {
    * @returns {Observable<any>}
    */
   addProducto(producto: any): Observable<any> {
-    debugger;
+    console.log("Realiza llamada añadir producto :"+producto);
     return this._http.post(this.url, producto);
   }
 }
