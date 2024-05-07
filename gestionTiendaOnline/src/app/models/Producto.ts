@@ -1,7 +1,7 @@
 import { Rating } from "./Rating";
 
 export class Producto {
-    private _title: string;
+    private title: string;
    
     private price: number;
     private description: string;
@@ -11,7 +11,7 @@ export class Producto {
    
 
     constructor(title: string, price: number, description: string, category: string, image: string, rating: Rating) {
-        this._title = title;
+        this.title = title;
         this.price = price;
         this.description = description;
         this.category = category;
@@ -19,17 +19,4 @@ export class Producto {
         this._rating = rating;
     }
 
-    public get title(): string {
-        return this._title;
-    }
-    public set title(value: string) {
-        this._title = value;
-    }
-
-    public get rating(): Rating {
-        return this._rating;
-    }
-    public set rating(value: Rating) {
-        this._rating = value;
-    }
-  }
+}

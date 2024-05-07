@@ -19,7 +19,11 @@ export class ProductosComponent implements OnInit {
   public actualizado: boolean | null = null;
   public mesajeDatosActualizado: string = "";
   public alertCSS: string | null = null;
-  public urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]';
+  //public urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]';
+  //public urlPattern ="/.*(png|jpg|jpeg|gif)$/";
+  public urlPattern = 'https?://.+\\.(jpg|png|gif|jpeg)$';
+
+
   productForm: FormGroup;
 
   @ViewChild('closebuttonActualizar') closebuttonActualizar: any;
@@ -37,7 +41,7 @@ export class ProductosComponent implements OnInit {
       price: "",
       description: "",
       category: "",
-      image: [null, [Validators.pattern(this.urlPattern)]],
+      image: ['', [Validators.pattern(this.urlPattern)]],
 
       rating: this.formBuilder.group({
         rate: [3.9],
@@ -53,6 +57,7 @@ export class ProductosComponent implements OnInit {
    */
   ngOnInit(): void {
     this.productosService.getProductos().subscribe((result) => {
+      console.log(result)
       this.productos = result;
       this.productoSelect = true;
     });
@@ -113,6 +118,7 @@ export class ProductosComponent implements OnInit {
       );
       this.productosService.addProducto(productoSeleccionado).subscribe(
         (result) => {
+          this.productos.push(result);
           console.log(result);
           this.actualizado = true;
           this.alertCSS = 'success';

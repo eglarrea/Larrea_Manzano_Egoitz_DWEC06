@@ -35,10 +35,10 @@ export class UsuariosComponent implements OnInit {
    */
   ngOnInit(): void {
     this._usuarioService.getUsuarios().subscribe((result) => {
-      this.usuarios = result;
-      console.log(result);
-      this.eliminarSelect = true;
-      this.editarSelect = true;
+    this.usuarios = result;
+    console.log(result);
+    this.eliminarSelect = true;
+    this.editarSelect = true;
     });
   }
 
@@ -77,6 +77,21 @@ export class UsuariosComponent implements OnInit {
     this.alertCSS = null;
     this.eliminado = null;
   }
+
+ /* eliminarObjetoConId(arr: { id: number }[], id: number) {
+    return arr.filter((obj: { id: number }) => obj.id !== id);
+}*/
+
+ eliminar( elemento:number){
+  let resultado = []
+  for (let i = 0; i < this.usuarios.length; i++) {
+    if (this.usuarios[i].id !== elemento) {
+      resultado.push(this.usuarios[i]);
+    }
+  }
+  this.usuarios=resultado;
+}
+
 
   /**
    * Metodo para eliminar usuario.
@@ -132,6 +147,8 @@ export class UsuariosComponent implements OnInit {
       this._usuarioService.deleteUsuario(this.usuarioSeleccionado.id).subscribe(
         (result) => {
           if (result != null) {
+            
+            this.eliminar(this.usuarioSeleccionado.id) 
             this.eliminado = true;
             this.alertCSS = 'success';
             this.mesajeDatosActualizado = 'Usuario eliminado correctamente';
