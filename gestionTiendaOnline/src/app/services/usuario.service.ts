@@ -17,7 +17,7 @@ export class UsuarioService {
      * Método para obtener todos los usuarios.
      * @returns {Observable<any>} 
      */
-    getUsuarios(): Observable<any> {
+    getUsuarios(): Observable<Usuario[]> {
         console.log("Realiza llamada obtener usuarios :" + this.url);
         return this._http.get<Usuario[]>(this.url);
     }

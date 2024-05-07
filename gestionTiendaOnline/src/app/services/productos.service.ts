@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductosService {
-  public url: string;
+  private url: string;
   constructor(public _http: HttpClient) {
     this.url = "https://fakestoreapi.com/products";
   }

@@ -144,11 +144,11 @@
             </div>
             <div class="col-8">
               <label for="category">Categoria</label>
-              <input
-                formControlName="category"
-                placeholder="Category"
-                class="form-control"
-              />
+              <select formControlName="category" class="form-select">
+                <option *ngFor="let option of categorias" [value]="option">
+                  {{option}}
+                </option>
+              </select>
             </div>
           </div>
           <div class="row">

@@ -3,6 +3,7 @@ import { ProductosService } from '../services/productos.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Rating } from '../models/Rating';
 import { Producto } from '../models/Producto';
+import { CatetoriesService } from '../services/catetories.service';
 
 @Component({
   selector: 'app-productos',
@@ -12,6 +13,7 @@ import { Producto } from '../models/Producto';
 
 export class ProductosComponent implements OnInit {
   public productos: any = [];
+  public categorias: any = [];
   public productoSeleccionado: any;
   public productoSelect: boolean = false;
   public editarProducto: boolean = false
@@ -35,7 +37,7 @@ export class ProductosComponent implements OnInit {
   @ViewChild('closebuttonAlta') closebuttonAlta: any;
 
 
-  constructor(private productosService: ProductosService, private formBuilder: FormBuilder) {
+  constructor(private productosService: ProductosService,private categoriaService: CatetoriesService  ,private formBuilder: FormBuilder) {
     this.productForm = this.formBuilder.group({
       title: [null, Validators.required],
       price: "",
@@ -61,6 +63,15 @@ export class ProductosComponent implements OnInit {
       this.productos = result;
       this.productoSelect = true;
     });
+    this.categoriaService.getCategories().subscribe((result)=>{
+      console.log(result);
+      this.categorias=result
+    },error=>{
+      this.actualizado = false;
+      this.alertCSS = 'danger';
+      this.mesajeDatosActualizado =
+        'Se ha producido al obtener las categorías: ' +
+        error.message;})
   }
 
   /**
