@@ -50,7 +50,6 @@ export class ProductosService {
      * @returns {Observable<any>} 
      */
    deleteProducto(id: string): Observable<any> {
-    debugger
     const urlId = this.url + '/' + id;
     console.log("Realiza llamada eliminar producto :" + urlId);
     return this._http.delete(urlId);
