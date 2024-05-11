@@ -5,11 +5,7 @@
         <button type="button" (click)="eliminarMensaje()" click class="btn-close" data-dismiss="alert" aria-label="Close">
         </button>
       </div>
-      <div *ngIf="eliminado!=null" class="alert alert-{{ alertCSS }} alert-dismissible fade show" role="alert">
-        <strong>{{ mesajeDatosActualizado}}</strong>
-        <button type="button" (click)="eliminarMensaje()" click class="btn-close" data-dismiss="alert" aria-label="Close">
-        </button>
-      </div>
+      
     
       <div class="row mb-3">
         <button type="button" class="w-100 btn btn-md btn-outline-dark " (click)="altaProducto()"  title="Añadir Productos" data-bs-toggle="modal" data-bs-target="#modalAlta"  >
@@ -27,7 +23,7 @@
                 <div class="btn-group">
                   <button type="button" title="Ver detalle"  (click)="verDetalleProducto(producto)"  data-bs-toggle="modal" data-bs-target="#modalDetalle"  class="btn btn-sm btn-outline-secondary">  <i class="fa fa-eye"></i></button>
                   <button type="button" title="Editar producto"  (click)="verEditarProducto(producto)" data-bs-toggle="modal" data-bs-target="#modalDetalle" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"> </i></button>
-                  <button type="button" title="Eliminar" class="btn btn-sm btn-outline-secondary"  data-bs-toggle="modal" data-bs-target="#modalConfirmacionEliminar" (click)="eliminarUsu(producto)">
+                  <button type="button" title="Eliminar" class="btn btn-sm btn-outline-secondary"  data-bs-toggle="modal" data-bs-target="#modalConfirmacionEliminar" (click)="eliminarProducto(producto)">
                     <i class="fa fa-trash"></i>
                   </button>
                 </div>

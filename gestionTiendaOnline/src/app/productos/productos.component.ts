@@ -182,7 +182,7 @@ export class ProductosComponent implements OnInit {
     );
   }
 
-  eliminarUsu(producto: any): void {
+  eliminarProducto(producto: any): void {
     this.productoSeleccionado = producto;
   }
 
