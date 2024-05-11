@@ -179,7 +179,9 @@ export class ProductosComponent implements OnInit {
         this.mesajeDatosActualizado =
           'Se ha producido un error al eliminar el producto: ' + error;
       }
-    );
+      
+    )
+    window.scrollTo(0, 0);
   }
 
   eliminarProducto(producto: any): void {
@@ -262,5 +264,6 @@ export class ProductosComponent implements OnInit {
           error.message;
       }
     );
+    window.scrollTo(0, 0);
   }
 }
