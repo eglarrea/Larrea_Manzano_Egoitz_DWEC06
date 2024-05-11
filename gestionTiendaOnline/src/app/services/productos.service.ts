@@ -43,4 +43,16 @@ export class ProductosService {
     console.log("Realiza llamada añadir producto :"+producto);
     return this._http.post(this.url, producto);
   }
+
+   /**
+     * Método para eliminar un usuario.
+     * @param {string} id - El ID del usuario a eliminar.
+     * @returns {Observable<any>} 
+     */
+   deleteProducto(id: string): Observable<any> {
+    debugger
+    const urlId = this.url + '/' + id;
+    console.log("Realiza llamada eliminar producto :" + urlId);
+    return this._http.delete(urlId);
+  }
 }

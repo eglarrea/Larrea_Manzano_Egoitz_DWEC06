@@ -17,14 +17,12 @@ export class ProductosComponent implements OnInit {
   public productoSeleccionado: any;
   public productoSelect: boolean = false;
   public editarProducto: boolean = false
-
+  public eliminarSelect: boolean = false;
+ // public eliminado:boolean | null =null;
   public actualizado: boolean | null = null;
   public mesajeDatosActualizado: string = "";
   public alertCSS: string | null = null;
-  //public urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]';
-  //public urlPattern ="/.*(png|jpg|jpeg|gif)$/";
   public urlPattern = 'https?://.+\\.(jpg|png|gif|jpeg)$';
-
 
   productForm: FormGroup;
 
@@ -35,6 +33,9 @@ export class ProductosComponent implements OnInit {
    * This is used to programmatically control the 'closebuttonAlta' element.
    */
   @ViewChild('closebuttonAlta') closebuttonAlta: any;
+
+  @ViewChild('closeEliminarbutton') closeEliminarbutton: any;
+  
 
 
   constructor(private productosService: ProductosService,private categoriaService: CatetoriesService  ,private formBuilder: FormBuilder) {
@@ -62,6 +63,7 @@ export class ProductosComponent implements OnInit {
       console.log(result)
       this.productos = result;
       this.productoSelect = true;
+      this.eliminarSelect=true;
     });
     this.categoriaService.getCategories().subscribe((result)=>{
       console.log(result);
@@ -153,6 +155,47 @@ export class ProductosComponent implements OnInit {
     }
   }
 
+
+  confirmEliminarProducto(usuario: any): void {
+    this.closeEliminarbutton.nativeElement.click();
+    this.productoSeleccionado = usuario;
+    this.productosService.deleteProducto(this.productoSeleccionado.id).subscribe(
+      (result)=>{
+        if (result != null) {
+            
+          this.eliminar(this.productoSeleccionado.id) 
+          this.actualizado = true;
+          this.alertCSS = 'success';
+          this.mesajeDatosActualizado = 'El producto se eliminado correctamente';
+        } else {
+          this.actualizado = false;
+          this.alertCSS = 'warning';
+          this.mesajeDatosActualizado = 'El producto no pudo ser eliminado';
+        }
+      },
+      (error) => {
+        this.actualizado = false;
+        this.alertCSS = 'danger';
+        this.mesajeDatosActualizado =
+          'Se ha producido un error al eliminar el producto: ' + error;
+      }
+    );
+  }
+
+  eliminarUsu(producto: any): void {
+    this.productoSeleccionado = producto;
+  }
+
+
+  eliminar( elemento:number){
+    let resultado = []
+    for (let i = 0; i < this.productos.length; i++) {
+      if (this.productos[i].id !== elemento) {
+        resultado.push(this.productos[i]);
+      }
+    }
+    this.productos=resultado;
+  }
   /**
    * This function is used to prepare the product for editing.
    * It first clears any previous alerts and status flags.
