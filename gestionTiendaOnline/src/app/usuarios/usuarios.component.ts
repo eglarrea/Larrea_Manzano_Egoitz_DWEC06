@@ -39,6 +39,10 @@ export class UsuariosComponent implements OnInit {
     console.log(result);
     this.eliminarSelect = true;
     this.editarSelect = true;
+    } ,error=>{
+      this.eliminado = false;
+      this.alertCSS = 'danger';
+      this.mesajeDatosActualizado ='Se ha producido un error al eliminar el usuario: ' + error.message; 
     });
   }
 

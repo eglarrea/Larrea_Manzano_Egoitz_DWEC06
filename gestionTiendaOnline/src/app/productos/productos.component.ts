@@ -64,16 +64,23 @@ export class ProductosComponent implements OnInit {
       this.productos = result;
       this.productoSelect = true;
       this.eliminarSelect=true;
+    },error=>{
+      debugger
+      this.actualizado = false;
+      this.alertCSS = 'danger';
+      this.mesajeDatosActualizado ='Se ha producido al obtener los productos: '+ error.message;
     });
+    
     this.categoriaService.getCategories().subscribe((result)=>{
       console.log(result);
       this.categorias=result
     },error=>{
+      debugger
       this.actualizado = false;
       this.alertCSS = 'danger';
       this.mesajeDatosActualizado =
         'Se ha producido al obtener las categorías: ' +
-        error.message;})
+        error.message;});
   }
 
   /**
