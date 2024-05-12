@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/Usuario';
 import { HttpClient } from '@angular/common/http';
+import { ContantesApp } from '../app.config';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ export class UsuarioService {
 
     public url: string;
     constructor(public _http: HttpClient) {
-        this.url = "https://fakestoreapi.com/users";
+        this.url = ContantesApp.urlApi+"/users";
     }
 
     /**

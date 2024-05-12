@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ContantesApp } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ProductosService {
   private url: string;
   constructor(public _http: HttpClient) {
-    this.url = "https://fakestoreapi.com/products";
+    this.url = ContantesApp.urlApi+"/products";
   }
 
   /**
