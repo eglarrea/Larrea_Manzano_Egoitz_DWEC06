@@ -74,7 +74,11 @@
                   </div>
                   <div class="col-4">
                       <label for="">Categoría</label>
-                      <input *ngIf="productoSeleccionado!=null" type="text" [(ngModel)]="productoSeleccionado.category" class="form-control" disabled="{{ editarProducto }}">
+                      <select *ngIf="productoSeleccionado!=null" [(ngModel)]="productoSeleccionado.category" class="form-select" disabled="{{ editarProducto }}">
+                        <option *ngFor="let option of categorias" [value]="option">
+                          {{option}}
+                        </option>
+                      </select>
                   </div>
               </div>
               <div class="row">
