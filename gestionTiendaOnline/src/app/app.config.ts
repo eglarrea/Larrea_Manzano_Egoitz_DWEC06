@@ -1,5 +1,5 @@
 export const ContantesApp=
 {
-    nombreTienda:"Ente es nuevo nombre",
+    nombreTienda:"Nombre tienda Bazar",
     urlApi: "https://fakestoreapi.com",
 }
