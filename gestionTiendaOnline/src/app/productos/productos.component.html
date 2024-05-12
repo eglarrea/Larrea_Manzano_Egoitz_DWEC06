@@ -5,15 +5,20 @@
         <button type="button" (click)="eliminarMensaje()" click class="btn-close" data-dismiss="alert" aria-label="Close">
         </button>
       </div>
-      
+
+      <div  *ngIf="productoSelect==false"  class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
     
-      <div class="row mb-3">
+      <div  *ngIf="productoSelect"  class="row mb-3">
         <button type="button" class="w-100 btn btn-md btn-outline-dark " (click)="altaProducto()"  title="Añadir Productos" data-bs-toggle="modal" data-bs-target="#modalAlta"  >
           <i class="fa fa-plus"></i>
           Añadir producto
         </button>
       </div>
-      <div class="row">
+      <div  *ngIf="productoSelect"  class="row">
         <div class="col-md-4" *ngFor="let producto of productos; index as i">
           <div class="card mb-4 box-shadow align-items-center">
             <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 280px; width: 60%; display: block;" src="{{ producto.image }}"/>
