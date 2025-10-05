@@ -11,6 +11,7 @@ WORKDIR /app
 
 # Instalar dependencias
 RUN npm install
+RUN chmod +x node_modules/.bin/ng
 
 # 🏗️ Compilar la app Angular
 RUN npx ng build --configuration=production
