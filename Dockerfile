@@ -13,7 +13,7 @@ WORKDIR /app
 RUN npm install
 
 # 🏗️ Compilar la app Angular
-RUN npm run build -- --configuration=production
+RUN npx ng build --configuration=production
 
 # 🚀 Etapa 2: Servir con Nginx
 FROM nginx:stable-alpine AS production-stage
