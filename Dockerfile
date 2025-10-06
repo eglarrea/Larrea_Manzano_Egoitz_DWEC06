@@ -22,7 +22,8 @@ FROM nginx:stable-alpine AS production-stage
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copia los archivos compilados de Angular
-COPY --from=build-stage /app/dist/gestion-tienda-online /usr/share/nginx/html
+#COPY --from=build-stage /app/dist/gestion-tienda-online /usr/share/nginx/html
+COPY --from=build-stage /app/dist/gestion-tienda-online/browser /usr/share/nginx/html
 
 # Copia configuración personalizada de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
