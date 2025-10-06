@@ -28,8 +28,6 @@ COPY --from=build-stage /app/dist/gestion-tienda-online/browser /usr/share/nginx
 # Copia configuración personalizada de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN ls -l /usr/share/nginx/html/browser/
-
 EXPOSE 80
 RUN chmod -R 755 /usr/share/nginx/html
 
