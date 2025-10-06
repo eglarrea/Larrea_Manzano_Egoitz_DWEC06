@@ -18,13 +18,13 @@ RUN npx ng build --configuration=production
 
 # 🚀 Etapa 2: Servir con Nginx
 FROM nginx:stable-alpine AS production-stage
+RUN ls -l /app/dist/gestion-tienda-online
 
 # Elimina la configuración por defecto de Nginx
 RUN rm -rf /usr/share/nginx/html/*
-
+RUN ls -l /app/dist/gestion-tienda-online
 # Copia los archivos compilados de Angular
 COPY --from=build-stage /app/dist/gestion-tienda-online /usr/share/nginx/html
-
 
 # Copia configuración personalizada de Nginx (opcional)
 # COPY nginx.conf /etc/nginx/nginx.conf
