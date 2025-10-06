@@ -28,5 +28,6 @@ COPY --from=build-stage /app/dist/gestion-tienda-online /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
+RUN chmod -R 755 /usr/share/nginx/html
 
 CMD ["nginx", "-g", "daemon off;"]
